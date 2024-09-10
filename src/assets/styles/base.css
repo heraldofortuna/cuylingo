@@ -1,0 +1,13 @@
+:root {
+}
+
+*,
+*::before,
+*::after {
+  font-weight: normal;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+}
