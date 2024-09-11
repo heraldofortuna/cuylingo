@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { Translation, TranslationList } from '@types/data'
+import type { Translation, TranslationList } from '../types/data'
 import InputComponent from '@components/InputComponent.vue'
 import ButtonComponent from '@components/ButtonComponent.vue'
 
