@@ -1,11 +1,13 @@
 <template>
-  <HeaderComponent />
-  <main class="bg-white max-w-[800px] mx-auto">
-    <div class="h-full flex flex-col gap-4 px-4 py-12">
-      <RouterView />
-    </div>
-  </main>
-  <FooterComponent />
+  <div class="min-h-screen flex flex-col">
+    <HeaderComponent />
+    <main class="bg-white w-full max-w-[800px] mx-auto">
+      <div class="h-full flex flex-col gap-4 px-4 py-12">
+        <RouterView />
+      </div>
+    </main>
+    <FooterComponent />
+  </div>
 </template>
 
 <script setup lang="ts">

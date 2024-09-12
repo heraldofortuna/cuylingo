@@ -2,7 +2,7 @@
   <button
     :type="type"
     :class="[
-      'w-fit-content text-white font-medium',
+      'w-fit-content font-medium leading-none border-2',
       colorClasses,
       variantClasses,
       sizeClasses,
@@ -61,20 +61,20 @@ const colorClasses = computed(() => {
 const variantClasses = computed(() => {
   switch (props.variant) {
     case 'outline':
-      return 'bg-transparent border border-primary-30'
+      return 'bg-transparent text-primary-60 border-primary-60'
     default:
-      return 'bg-primary-60 border border-primary-60'
+      return 'bg-primary-60 text-white border-primary-60'
   }
 })
 
 const sizeClasses = computed(() => {
   switch (props.size) {
     case 'small':
-      return 'text-sm px-6 py-3'
+      return 'h-10 text-sm px-6 py-3'
     case 'large':
-      return 'text-lg px-8 py-5'
+      return 'h-14 text-lg px-8 py-5'
     default:
-      return 'text-base px-7 py-4'
+      return 'h-12 text-base px-7 py-4'
   }
 })
 </script>

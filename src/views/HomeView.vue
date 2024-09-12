@@ -1,8 +1,8 @@
 <template>
   <section>
-    <div class="flex flex-col gap-4">
-      <h1 class="text-center text-2xl font-bold md:text-4xl">Practiquemos vocabulario</h1>
-      <p class="text-left text-base md:text-lg">Traduce las siguientes palabras:</p>
+    <div class="flex flex-col items-center gap-4">
+      <h1 class="text-center text-2xl font-bold md:text-4xl">Vocabulary</h1>
+      <BadgeComponent> Nivel {{ level + 1 }} </BadgeComponent>
     </div>
   </section>
   <section>
@@ -29,6 +29,13 @@
       >
     </div>
   </section>
+  <ModalComponent
+    :title="'¿Vamos al siguiente nivel?'"
+    :label="'¡Felicidades!'"
+    :isOpen="isModalOpen"
+    @close="closeModal"
+    @confirm="handleConfirmModal"
+  />
 </template>
 
 <script setup lang="ts">
@@ -36,23 +43,31 @@ import { ref, watch } from 'vue'
 import type { Translation, TranslationList } from '../types/data'
 import InputComponent from '@components/InputComponent.vue'
 import ButtonComponent from '@components/ButtonComponent.vue'
+import BadgeComponent from '@components/BadgeComponent.vue'
+import ModalComponent from '@components/ModalComponent.vue'
+import { wordsGroup } from '@const/index'
 
-const words = ref<TranslationList>([
-  { id: 0, request: 'Nombre', answer: 'Name', value: '', isValid: false },
-  { id: 1, request: 'Casa', answer: 'House', value: '', isValid: false },
-  { id: 2, request: 'Amigo', answer: 'Friend', value: '', isValid: false },
-  { id: 3, request: 'Escuela', answer: 'School', value: '', isValid: false },
-  { id: 4, request: 'Libro', answer: 'Book', value: '', isValid: false },
-  { id: 5, request: 'Mesa', answer: 'Table', value: '', isValid: false },
-  { id: 6, request: 'Ventana', answer: 'Window', value: '', isValid: false },
-  { id: 7, request: 'Puerta', answer: 'Door', value: '', isValid: false },
-  { id: 8, request: 'Reloj', answer: 'Clock', value: '', isValid: false },
-  { id: 9, request: 'Coche', answer: 'Car', value: '', isValid: false },
-  { id: 10, request: 'Perro', answer: 'Dog', value: '', isValid: false }
-])
-
+const level = ref<number>(0)
+const words = ref<TranslationList>(wordsGroup[level.value])
 const isEnabledButton = ref<boolean>(false)
 const isAfterSubmit = ref<boolean>(false)
+const isModalOpen = ref(false)
+
+const openModal = () => {
+  isModalOpen.value = true
+}
+
+const closeModal = () => {
+  isModalOpen.value = false
+}
+
+const handleConfirmModal = () => {
+  level.value += 1
+  isAfterSubmit.value = false
+  closeModal()
+
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
 
 const handleSendResults = () => {
   isAfterSubmit.value = true
@@ -60,9 +75,13 @@ const handleSendResults = () => {
   const allValid = words.value.every((word: Translation) => word.isValid === true)
 
   if (allValid) {
-    alert('¡Completaste con éxito todo el vocabulario!')
+    openModal()
   }
 }
+
+watch(level, (newLevel) => {
+  words.value = wordsGroup[newLevel]
+})
 
 watch(
   words,

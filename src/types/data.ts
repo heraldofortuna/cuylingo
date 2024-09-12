@@ -7,3 +7,5 @@ export type Translation = {
 }
 
 export type TranslationList = Translation[]
+
+export type TranslationListGroup = Translation[][]
