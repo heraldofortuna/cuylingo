@@ -45,7 +45,7 @@ import InputComponent from '@components/InputComponent.vue'
 import ButtonComponent from '@components/ButtonComponent.vue'
 import BadgeComponent from '@components/BadgeComponent.vue'
 import ModalComponent from '@components/ModalComponent.vue'
-import { wordsGroup } from '@const/index'
+import { wordsGroup } from '../const/index'
 
 const level = ref<number>(0)
 const words = ref<TranslationList>(wordsGroup[level.value])
